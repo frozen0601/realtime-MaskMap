@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Assignment 7</title>
+
+  <style type="text/css">
+    #topic {
+      font-size: 48px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    body {
+      width: 80%;
+      margin: 10px auto
+    }
+
+    table {
+      margin: 10px auto;
+      width: 100%;
+      border: 1px solid #ccc;
+    }
+
+    td {
+      text-align: right;
+      padding: 5px 10px
+    }
+
+    td+td {
+      text-align: left
+    }
+  </style>
+  <script type="text/javascript" src="http://ycchen.im.ncnu.edu.tw/www2011/lab/twCity.js"></script>
+  <script type="text/javascript">
+    window.onload = function () {
+      generateDropdown();
+    };
+
+
+    function generateDropdown() {
+      var sel = document.getElementById('dropdown');
+      for (var i in cityArr) {      //automatically generate dropdown
+        var opt = document.createElement('option');
+        opt.innerHTML = i;
+        opt.value = i;
+        sel.appendChild(opt);
+      }
+    }
+
+    function generateDropdown2(selTag) {
+      var city = selTag.options[selTag.selectedIndex].text;
+      var sel = document.getElementById('dropdown2');
+      for (let i = sel.options.length - 1; i >= 0; i--) {
+        sel.options[i] = null;
+      }
+      for (var i in cityArr) {      //automatically generate dropdown
+        if (i == city) {
+          for (var j in cityArr[i]) {
+            var opt = document.createElement('option');
+            opt.innerHTML = cityArr[i][j];
+            opt.value = cityArr[i][j];
+            sel.appendChild(opt);
+          }
+        }
+      }
+    }
+
+  </script>
+</head>
+
+<body>
+  <h2>Assignment 7: 口罩剩餘數量即時線上查詢</h2>
+  <p id="test"></p>
+  <form id="join" action="mask.php" method="post">
+    <fieldset>
+      <select id="dropdown" name="sdropdown" onchange="generateDropdown2(this)">
+        <option selected="selected">請選擇縣市</option>;
+      </select><br />
+      <select id="dropdown2" name="sdropdown2" onchange="search2(this)">
+        <option selected="selected">請選擇鄉鎮</option>;
+      </select><br />
+      <div id="dala"></div>
+      <div id="buttons"><input type="submit" value="search"/></div>
+    </fieldset>
+  </form>
+
+
+
+
+</body>
+
+</html>
